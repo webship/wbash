@@ -1,1 +1,0 @@
-# VDO web commands
