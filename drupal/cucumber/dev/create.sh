@@ -7,7 +7,7 @@ echo "  ######################################################################";
 echo "   
 
 ## Grab local development directory path for the project argument.
-unset full_local_project_path ;
+full_local_project_path="" ;
 while [[ ! -d "${full_local_project_path}" ]]; do
 
   echo "Full local project path:";
@@ -39,4 +39,4 @@ done
 cd ${full_local_project_path};
 
 # Create project with composer.
-composer create-project webship/cucumber-project:9.0.x-dev ${project_name} --stability dev --no-interaction -vvv
+composer create-project webship/cucumber-project:10.0.x-dev ${project_name} --stability dev --no-interaction -vvv ;
