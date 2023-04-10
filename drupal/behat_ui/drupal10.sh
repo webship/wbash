@@ -20,7 +20,7 @@ package_name="Drupal";
 webroot="web";
 
 ## Behat UI package template source.
-behat_ui_template_source="https://github.com/webship/drupal10-behat_ui-template";
+behat_ui_template_source="https://github.com/webship/drupal10-behat_ui-template/get";
 behat_ui_template_name="drupal10-behat_ui-template";
 
 ## Package template version.
