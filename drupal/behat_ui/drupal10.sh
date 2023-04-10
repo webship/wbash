@@ -143,7 +143,7 @@ composer config bin-dir bin
 composer require --dev drupal/core-dev:~10.0 --with-all-dependencies
 composer require --dev drush/drush:~11.0
 composer require --dev drupal/drupal-extension:~5.0 --with-all-dependencies
-composer require --dev emuse/behat-html-formatter:~1.0
+composer require --dev webship/behat-html-formatter:~1.0
 composer require --dev drevops/behat-screenshot
 
 ## Add Behat UI module by composer.
