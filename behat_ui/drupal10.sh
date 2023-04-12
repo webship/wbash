@@ -9,7 +9,7 @@
 ## -----------------------------------------------------------------------------
 ## cd /var/www/html/myproject
 ## Run the following command.
-## bash <(wget -O - https://raw.githubusercontent.com/webship/wbash/v1/drupal/behat_ui/drupal10.sh)
+## bash <(wget -O - https://raw.githubusercontent.com/webship/wbash/v1/behat_ui/drupal10.sh)
 ##------------------------------------------------------------------------------
 ##
 ##
@@ -24,7 +24,7 @@ behat_ui_template_source="https://github.com/webship/drupal10-behat_ui-template/
 behat_ui_template_name="drupal10-behat_ui-template";
 
 ## Package template version.
-version="main" ;
+version="1.0.0" ;
 
 ## Default Selenium host.
 default_selenium_host='127.0.0.1:4444/wd/hub';
@@ -205,3 +205,10 @@ sed -i "s|SELENIUM_HOST|${selenium_host}|g" ${local_project_path}/behat.yml;
 
 # Copy the Behat UI settings file to the config install before installing the module.
 cp features/behat_ui.settings.yml web/modules/contrib/behat_ui/config/install/
+
+# Make package files writable to export reports
+cd $local_project_path ;
+sudo chmod 775 -R .; sudo chown www-data:tasneem -R .
+
+# Remove (goutte: ~).
+sed -i "s|goutte: ~|${}|g" ${local_project_path}/behat.yml;

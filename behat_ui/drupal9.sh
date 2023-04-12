@@ -24,7 +24,7 @@ behat_ui_template_source="https://github.com/webship/drupal9-behat_ui-template/a
 behat_ui_template_name="drupal9-behat_ui-template";
 
 ## Package template version.
-version="main" ;
+version="1.0.0" ;
 
 ## Default Selenium host.
 default_selenium_host='127.0.0.1:4444/wd/hub';
@@ -205,3 +205,7 @@ sed -i "s|SELENIUM_HOST|${selenium_host}|g" ${local_project_path}/behat.yml;
 
 # Copy the Behat UI settings file to the config install before installing the module.
 cp features/behat_ui.settings.yml web/modules/contrib/behat_ui/config/install/
+
+# Make package files writable to export reports
+cd $local_project_path ;
+sudo chmod 775 -R .; sudo chown www-data:tasneem -R .
