@@ -211,4 +211,4 @@ cd $local_project_path ;
 sudo chmod 775 -R .; sudo chown www-data:tasneem -R .
 
 # Remove (goutte: ~).
-sed -i "s|goutte: ~|${}|g" ${local_project_path}/behat.yml;
+sed -i "s|goutte: ~||g" ${local_project_path}/behat.yml;
