@@ -20,11 +20,11 @@ package_name="Drupal";
 webroot="web";
 
 ## Behat UI package template source.
-behat_ui_template_source="https://github.com/webship/drupal10-behat_ui-template/archive/refs/tags/1.0.0";
+behat_ui_template_source="https://github.com/webship/drupal10-behat_ui-template/archive/refs/tags";
 behat_ui_template_name="drupal10-behat_ui-template";
 
 ## Package template version.
-version="1.0.0" ;
+version="1.0.1" ;
 
 ## Default Selenium host.
 default_selenium_host='127.0.0.1:4444/wd/hub';
@@ -204,11 +204,4 @@ sed -i "s|PROJECT_BASE_URL|${project_base_url}|g" ${local_project_path}/behat.ym
 sed -i "s|SELENIUM_HOST|${selenium_host}|g" ${local_project_path}/behat.yml;
 
 # Copy the Behat UI settings file to the config install before installing the module.
-cp features/behat_ui.settings.yml web/modules/contrib/behat_ui/config/install/
-
-# Make package files writable to export reports
-cd $local_project_path ;
-sudo chmod 775 -R .; sudo chown www-data:tasneem -R .
-
-# Remove (goutte: ~).
-sed -i "s|goutte: ~||g" ${local_project_path}/behat.yml;
+cp features/behat_ui.settings.yml ${webroot}/modules/contrib/behat_ui/config/install/
