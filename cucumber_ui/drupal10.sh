@@ -192,16 +192,13 @@ sudo rm -rf ${local_project_path}/${version}.tar.gz ${local_project_path}/${vers
 sudo rm -rf ${local_project_path}/wget-log* ;
 
 # Replace DRUPAL_PROJECT_PATH with the project path.
-grep -rl "DRUPAL_PROJECT_PATH" ${local_project_path}/tests | xargs sed -i "s|DRUPAL_PROJECT_PATH|${local_project_path}|g" ;
+grep -rl "DRUPAL_PROJECT_PATH" ${local_project_path}/tests/cucumber_ui.settings.yml | xargs sed -i "s|DRUPAL_PROJECT_PATH|${local_project_path}|g" ;
 
-# Replace PROJECT_NAME with the machine name of the project folder name.
-grep -rl "PROJECT_NAME" ${local_project_path}/tests | xargs sed -i "s|PROJECT_NAME|${project_name}|g" ;
+# Replace PROJECT_BASE_URL with the Project URL.
+grep -rl "PROJECT_BASE_URL" ${project_base_url}/tests/nightwatch.conf.js | xargs sed -i "s|PROJECT_BASE_URL|${project_base_url}|g" ;
 
-# Replace PROJECT_BASE_URL of Project URL.
-sed -i "s|PROJECT_BASE_URL|${project_base_url}|g" ${local_project_path}/nightwatch.conf.js;
-
-# Replace SELENIUM_HOST with the current selected selenium host domain.
-sed -i "s|SELENIUM_HOST|${selenium_host}|g" ${local_project_path}/nightwatch.conf.js;
+## Change /tests folder to be writable. 
+sudo chmod 775 -R .; sudo chown www-data:$USER -R .;
 
 # Copy the Cucumber UI settings file to the config install before installing the module.
 cp tests/cucumber_ui.settings.yml ${webroot}/modules/contrib/cucumber_ui/config/install/
