@@ -192,13 +192,13 @@ sudo rm -rf ${local_project_path}/${version}.tar.gz ${local_project_path}/${vers
 sudo rm -rf ${local_project_path}/wget-log* ;
 
 # Replace DRUPAL_PROJECT_PATH with the project path.
-grep -rl "DRUPAL_PROJECT_PATH" ${local_project_path}/tests/cucumber_ui.settings.yml | xargs sed -i "s|DRUPAL_PROJECT_PATH|${local_project_path}|g" ;
+grep -rl "DRUPAL_PROJECT_PATH" ${local_project_path}/cucumber_ui.settings.yml | xargs sed -i "s|DRUPAL_PROJECT_PATH|${local_project_path}|g" ;
 
 # Replace PROJECT_BASE_URL with the Project URL.
-grep -rl "PROJECT_BASE_URL" ${project_base_url}/tests/nightwatch.conf.js | xargs sed -i "s|PROJECT_BASE_URL|${project_base_url}|g" ;
+grep -rl "PROJECT_BASE_URL" ${local_project_path}/nightwatch.conf.js | xargs sed -i "s|PROJECT_BASE_URL|${project_base_url}|g" ;
 
 ## Change /tests folder to be writable. 
 sudo chmod 775 -R .; sudo chown www-data:$USER -R .;
 
 # Copy the Cucumber UI settings file to the config install before installing the module.
-cp tests/cucumber_ui.settings.yml ${webroot}/modules/contrib/cucumber_ui/config/install/
+cp cucumber_ui.settings.yml ${webroot}/modules/contrib/cucumber_ui/config/install/
