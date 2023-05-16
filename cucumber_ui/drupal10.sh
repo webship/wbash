@@ -138,13 +138,6 @@ rm composer.lock
 ## Add bin direcoty to the Drupal site.
 composer config bin-dir bin
 
-## Add needed testing packages by composer.
-
-composer require --dev drupal/core-dev:~10.0 --with-all-dependencies
-composer require --dev drush/drush:~11.0
-composer require --dev drupal/drupal-extension:~5.0 --with-all-dependencies
-composer require --dev webship/bootstrap-html-formatter:~1.0
-
 ## Add Cucumber UI module by composer.
 composer require --dev drupal/cucumber_ui:1.0.x-dev;
 
@@ -171,7 +164,7 @@ fi
 
 ## Remove the old tests folder.
 if [[ -d "${local_project_path}/tests" ]]; then
-  sudo rm -rf ${local_project_path}/tests ;
+  sudo rm -rf ${local_project_path}/tests ; 
 fi
 
 ## Download The Cucumber UI template for the package.
