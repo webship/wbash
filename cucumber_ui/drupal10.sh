@@ -185,20 +185,20 @@ mv ${local_project_path}/${version}/nightwatch.conf.js ${local_project_path}/nig
 ## Place package.json file in its target path.
 mv ${local_project_path}/${version}/package.json ${local_project_path}/package.json;
 
+## Change /tests folder to be writable. 
+sudo chmod 775 -R .; sudo chown www-data:$USER -R .;
+
+# Replace DRUPAL_PROJECT_PATH with the project path.
+grep -rl "DRUPAL_PROJECT_PATH" ${local_project_path}/${version}/cucumber_ui.settings.yml | xargs sed -i "s|DRUPAL_PROJECT_PATH|${local_project_path}|g" ;
+
+# Replace PROJECT_BASE_URL with the Project URL.
+grep -rl "PROJECT_BASE_URL" ${local_project_path}/${version}/nightwatch.conf.js | xargs sed -i "s|PROJECT_BASE_URL|${project_base_url}|g" ;
+
+# Copy the Cucumber UI settings file to the config install before installing the module.
+mv ${local_project_path}/${version}/cucumber_ui.settings.yml ${local_project_path}/modules/contrib/cucumber_ui/config/install/
+
 ## Clean up the tar and temp folder.
 sudo rm -rf ${local_project_path}/${version}.tar.gz ${local_project_path}/${version} ;
 
 ## Clean the wget log files. 
 sudo rm -rf ${local_project_path}/wget-log* ;
-
-# Replace DRUPAL_PROJECT_PATH with the project path.
-grep -rl "DRUPAL_PROJECT_PATH" ${local_project_path}/cucumber_ui.settings.yml | xargs sed -i "s|DRUPAL_PROJECT_PATH|${local_project_path}|g" ;
-
-# Replace PROJECT_BASE_URL with the Project URL.
-grep -rl "PROJECT_BASE_URL" ${local_project_path}/nightwatch.conf.js | xargs sed -i "s|PROJECT_BASE_URL|${project_base_url}|g" ;
-
-## Change /tests folder to be writable. 
-sudo chmod 775 -R .; sudo chown www-data:$USER -R .;
-
-# Copy the Cucumber UI settings file to the config install before installing the module.
-cp cucumber_ui.settings.yml ${webroot}/modules/contrib/cucumber_ui/config/install/
