@@ -182,17 +182,16 @@ sudo chmod 775 -R .; sudo chown www-data:$USER -R .;
 ## Place tests folder in its target path.
 mv ${local_project_path}/${version}/tests ${local_project_path}/tests;
 
-## Place nightwatch.conf.js file in its target path.
-mv ${local_project_path}/${version}/nightwatch.conf.js ${local_project_path}/nightwatch.conf.js;
-
 ## Place package.json file in its target path.
 mv ${local_project_path}/${version}/package.json ${local_project_path}/package.json;
 
+## Place nightwatch.conf.js file in its target path.
+mv ${local_project_path}/${version}/nightwatch.conf.js ${local_project_path}/nightwatch.conf.js;
+# Replace PROJECT_BASE_URL with the Project URL.
+grep -rl "PROJECT_BASE_URL" ${local_project_path}/nightwatch.conf.js | xargs sed -i "s|PROJECT_BASE_URL|${project_base_url}|g" ;
+
 # Replace DRUPAL_PROJECT_PATH with the project path.
 grep -rl "DRUPAL_PROJECT_PATH" ${local_project_path}/${version}/cucumber_ui.settings.yml | xargs sed -i "s|DRUPAL_PROJECT_PATH|${local_project_path}|g" ;
-
-# Replace PROJECT_BASE_URL with the Project URL.
-grep -rl "PROJECT_BASE_URL" ${local_project_path}/${version}/nightwatch.conf.js | xargs sed -i "s|PROJECT_BASE_URL|${project_base_url}|g" ;
 
 # Copy the Cucumber UI settings file to the config install before installing the module.
 mv ${local_project_path}/${version}/cucumber_ui.settings.yml ${local_project_path}/${webroot}/modules/contrib/cucumber_ui/config/install/
