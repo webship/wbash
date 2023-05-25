@@ -165,13 +165,16 @@ mv ${local_project_path}/${version}/tests ${local_project_path}/tests;
 ## Place nightwatch.conf.js file in its target path.
 mv ${local_project_path}/${version}/nightwatch.conf.js ${local_project_path}/nightwatch.conf.js;
 
+# Replace PROJECT_BASE_URL with the Project URL.
+grep -rl "PROJECT_BASE_URL" ${local_project_path}/nightwatch.conf.js | xargs sed -i "s|PROJECT_BASE_URL|${project_base_url}|g" ;
+
 $command = "nightwatch --format @cucumber/pretty-formatter --format-options '{\"colorsEnabled\": true}' --format-options '{\"theme\": {\"feature keyword\":[\"bold\",\"blue\"],\"feature name\":[\"blue\",\"underline\"],\"feature description\":[\"blueBright\"],\"scenario keyword\":[\"bold\",\"magenta\"],\"scenario name\":[\"magenta\",\"underline\"],\"step keyword\":[\"bold\",\"green\"],\"step text\":[\"greenBright\",\"italic\"]}}' --format json:./tests/reports/cucumber-report-$( date '+%Y-%m-%d_%H-%M' ).json --format html:./tests/reports/cucumber-report-$( date '+%Y-%m-%d_%H-%M' ).html";
 
-$package = file_get_contents('${local_project_path}/package.json');
+$package = file_get_contents(${local_project_path}.'/package.json');
 $tempArray = json_decode($package);
 $tempArray->scripts->test = $command;
 
-file_put_contents("${local_project_path}/package.json", $tempArray);
+file_put_contents(${local_project_path}."/package.json", $tempArray);
 
 ## Clean up the tar and temp folder.
 sudo rm -rf ${local_project_path}/${version}.tar.gz ${local_project_path}/${version} ;
