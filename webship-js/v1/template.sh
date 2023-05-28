@@ -19,7 +19,7 @@ template_source="https://github.com/webship/webship-js-template/archive/refs/tag
 template_name="webship-js-template";
 
 ## Package template version.
-version="1.0.2" ;
+version="1.0.1" ;
 
 ## Default Selenium host.
 default_selenium_host='127.0.0.1:4444/wd/hub';
