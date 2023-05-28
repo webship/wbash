@@ -19,7 +19,7 @@ template_source="https://github.com/webship/webship-js-template/archive/refs/tag
 template_name="webship-js-template";
 
 ## Package template version.
-version="1.0.1" ;
+version="1.0.2" ;
 
 ## Default Selenium host.
 default_selenium_host='127.0.0.1:4444/wd/hub';
@@ -147,6 +147,11 @@ if [[ -f "${local_project_path}/package.json" ]]; then
   rm ${local_project_path}/package.json;
 fi
 
+## Remove the old generate-reports.js file.
+if [[ -f "${local_project_path}/generate-reports.js" ]]; then
+  rm ${local_project_path}/generate-reports.js;
+fi
+
 ## Remove the old tests folder.
 if [[ -d "${local_project_path}/tests" ]]; then
   sudo rm -rf ${local_project_path}/tests ; 
@@ -169,6 +174,9 @@ mv ${local_project_path}/${version}/tests ${local_project_path}/tests;
 
 ## Place package.json file in its target path.
 mv ${local_project_path}/${version}/package.json ${local_project_path}/package.json;
+
+## Place generate-reports.js file in its target path.
+mv ${local_project_path}/${version}/generate-reports.js ${local_project_path}/generate-reports.js;
 
 ## Place nightwatch.conf.js file in its target path.
 mv ${local_project_path}/${version}/nightwatch.conf.js ${local_project_path}/nightwatch.conf.js;
