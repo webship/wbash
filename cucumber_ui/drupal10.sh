@@ -198,9 +198,6 @@ mv ${local_project_path}/${version}/package.json ${local_project_path}/package.j
 ## Place generate-reports.js file in its target path.
 mv ${local_project_path}/${version}/generate-reports.js ${local_project_path}/generate-reports.js;
 
-## Place generate-reports.js file in its target path.
-mv ${local_project_path}/${version}/generate-reports.js ${local_project_path}/generate-reports.js;
-
 ## Place nightwatch.conf.js file in its target path.
 mv ${local_project_path}/${version}/nightwatch.conf.js ${local_project_path}/nightwatch.conf.js;
 # Replace PROJECT_BASE_URL with the Project URL.
@@ -217,3 +214,7 @@ sudo rm -rf ${local_project_path}/${version}.tar.gz ${local_project_path}/${vers
 
 ## Clean the wget log files. 
 sudo rm -rf ${local_project_path}/wget-log* ;
+
+## Install Yarn. 
+cd ${local_project_path};
+yarn install;
