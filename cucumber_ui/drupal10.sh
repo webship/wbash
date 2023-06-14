@@ -24,7 +24,7 @@ cucumber_ui_template_source="https://github.com/webship/drupal10-cucumber_ui-tem
 cucumber_ui_template_name="drupal10-cucumber_ui-template";
 
 ## Package template version.
-version="1.0.3" ;
+version="1.0.5" ;
 
 ## Default Selenium host.
 default_selenium_host='127.0.0.1:4444/wd/hub';
