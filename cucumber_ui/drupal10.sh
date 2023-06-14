@@ -162,14 +162,17 @@ if [[ -f "${local_project_path}/package.json" ]]; then
   rm ${local_project_path}/package.json;
 fi
 
-## Remove the old generate-reports.js file.
-if [[ -f "${local_project_path}/generate-reports.js" ]]; then
-  rm ${local_project_path}/generate-reports.js;
+## Remove the old generate HTML format files.
+if [[ -f "${local_project_path}/bootstrap.js" ]]; then
+  rm ${local_project_path}/bootstrap.js;
 fi
 
-## Remove the old generate-reports.js file.
-if [[ -f "${local_project_path}/generate-reports.js" ]]; then
-  rm ${local_project_path}/generate-reports.js;
+if [[ -f "${local_project_path}/foundation.js" ]]; then
+  rm ${local_project_path}/foundation.js;
+fi
+
+if [[ -f "${local_project_path}/simple.js" ]]; then
+  rm ${local_project_path}/simple.js;
 fi
 
 ## Remove the old tests folder.
@@ -195,8 +198,10 @@ mv ${local_project_path}/${version}/tests ${local_project_path}/tests;
 ## Place package.json file in its target path.
 mv ${local_project_path}/${version}/package.json ${local_project_path}/package.json;
 
-## Place generate-reports.js file in its target path.
-mv ${local_project_path}/${version}/generate-reports.js ${local_project_path}/generate-reports.js;
+## Place generate HTML format files in it target path.
+mv ${local_project_path}/${version}/bootstrap.js ${local_project_path}/bootstrap.js;
+mv ${local_project_path}/${version}/foundation.js ${local_project_path}/foundation.js;
+mv ${local_project_path}/${version}/simple.js ${local_project_path}/simple.js;
 
 ## Place nightwatch.conf.js file in its target path.
 mv ${local_project_path}/${version}/nightwatch.conf.js ${local_project_path}/nightwatch.conf.js;
