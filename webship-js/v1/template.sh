@@ -142,10 +142,19 @@ if [[ -f "${local_project_path}/nightwatch.conf.js" ]]; then
   rm ${local_project_path}/nightwatch.conf.js;
 fi
 
-## Remove the old package.json file.
-if [[ -f "${local_project_path}/package.json" ]]; then
-  rm ${local_project_path}/package.json;
+## Append into package.json file.
+PACKAGE_NAME="webship-js"
+PACKAGE_VERSION="~1.0.0"
+
+PACKAGE_JSON_FILE="${local_project_path}/package.json"
+if ! command -v jq &> /dev/null
+then
+  sudo apt-get install jq
 fi
+jq --arg name "$PACKAGE_NAME" --arg version "$PACKAGE_VERSION" \
+   '.dependencies += {($name): $version}' "$PACKAGE_JSON_FILE" > temp.json && mv temp.json "$PACKAGE_JSON_FILE"
+
+echo "Dependency '$PACKAGE_NAME@$PACKAGE_VERSION' appended to $PACKAGE_JSON_FILE."
 
 ## Remove the old generate-reports.js file.
 if [[ -f "${local_project_path}/generate-reports.js" ]]; then
