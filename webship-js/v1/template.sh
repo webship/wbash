@@ -176,7 +176,7 @@ PACKAGE_JSON_FILE="${local_project_path}/package.json"
 jq --arg name "$SCRIPT_NAME" --arg cmd "$SCRIPT_COMMAND" \
    '.scripts += {($name): $cmd}' "$PACKAGE_JSON_FILE" > temp.json && sudo mv temp.json "$PACKAGE_JSON_FILE"
 
-   echo "Script '$SCRIPT_NAME' added/updated in $PACKAGE_JSON_PATH"
+   echo "Script '$SCRIPT_NAME' added to $PACKAGE_JSON_FILE."
 fi
 
 ## Remove the old generate-reports.js file.
