@@ -155,7 +155,8 @@ then
   sudo apt-get install jq
 fi
 jq --arg name "$PACKAGE_NAME" --arg version "$PACKAGE_VERSION" \
-   '.dependencies += {($name): $version}' "$PACKAGE_JSON_FILE"
+   '.dependencies += {($name): $version}' "$PACKAGE_JSON_FILE" > temp.json && mv temp.json "$PACKAGE_JSON_FILE"
+
 echo "Dependency '$PACKAGE_NAME@$PACKAGE_VERSION' appended to $PACKAGE_JSON_FILE."
 fi
 
