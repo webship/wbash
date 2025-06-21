@@ -142,6 +142,11 @@ if [[ -f "${local_project_path}/nightwatch.conf.js" ]]; then
   rm ${local_project_path}/nightwatch.conf.js;
 fi
 
+## Remove the old package.json file.
+if [[ -f "${local_project_path}/package.json" ]]; then
+  rm ${local_project_path}/package.json;
+fi
+
 ## Remove the old generate-reports.js file.
 if [[ -f "${local_project_path}/generate-reports.js" ]]; then
   rm ${local_project_path}/generate-reports.js;
@@ -168,9 +173,7 @@ sudo chmod 775 -R .; sudo chown www-data:$USER -R .;
 mv ${local_project_path}/${version}/tests ${local_project_path}/tests;
 
 ## Place package.json file in its target path.
-if [[ ! -f "${local_project_path}/package.json" ]]; then
 mv ${local_project_path}/${version}/package.json ${local_project_path}/package.json;
-if
 
 ## Place generate-reports.js file in its target path.
 mv ${local_project_path}/${version}/generate-reports.js ${local_project_path}/generate-reports.js;
