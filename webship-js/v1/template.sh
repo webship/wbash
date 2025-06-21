@@ -22,7 +22,10 @@ template_name="webship-js-template";
 version="1.0.3" ;
 
 ## Default Selenium host.
-default_selenium_host='127.0.0.1:4444/wd/hub';
+default_selenium_host='127.0.0.1';
+
+## Default Selenium port.
+default_selenium_port='4444';
 
 ## Read the IP address, geteway and local iface.
 unset local_gateway;
@@ -50,6 +53,9 @@ url_format='(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%
 
 ## Domain name format with no protocal.
 domain_format='[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]';
+
+## Number format.
+number_format='[0-9]';
 
 ## Grab local development directory path for the project argument.
 unset local_project_path ;
@@ -124,6 +130,24 @@ while [[ ! ${selenium_host} =~ $domain_format ]]; do
   fi
 done
 
+## Read the Selenium port argument.
+unset selenium_port;
+while [[ ! ${selenium_port} =~ $number_format ]]; do
+
+  read -p "Selenium Port ( ${default_selenium_port} ): " selenium_port;
+
+  if [ -z "$selenium_port" ]
+  then
+    selenium_port=${default_selenium_port};
+  fi
+
+  if [[ ! ${selenium_port} =~ $number_format ]]; then
+    echo "---------------------------------------------------------------------------";
+    echo "  The port is not a valid port number";
+    echo "---------------------------------------------------------------------------";
+  fi
+done
+
 ## Change directory to the local project path.
 cd $local_project_path ;
 
@@ -183,6 +207,12 @@ mv ${local_project_path}/${version}/generate-reports.js ${local_project_path}/ge
 
 ## Place nightwatch.conf.js file in its target path.
 mv ${local_project_path}/${version}/nightwatch.conf.js ${local_project_path}/nightwatch.conf.js;
+
+# Replace 4444 with the selenium port.
+grep -rl "4444" ${local_project_path}/nightwatch.conf.js | xargs sed -i "s|4444|${default_selenium_port}|g";
+
+# Replace 127.0.0.1 with the selenium host.
+grep -rl "127.0.0.1" ${local_project_path}/nightwatch.conf.js | xargs sed -i "s|127.0.0.1|${default_selenium_host}|g";
 
 # Replace PROJECT_BASE_URL with the Project URL.
 grep -rl "PROJECT_BASE_URL" ${local_project_path}/nightwatch.conf.js | xargs sed -i "s|PROJECT_BASE_URL|${project_base_url}|g" ;
