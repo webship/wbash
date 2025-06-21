@@ -142,6 +142,9 @@ if [[ -f "${local_project_path}/nightwatch.conf.js" ]]; then
   rm ${local_project_path}/nightwatch.conf.js;
 fi
 
+## Append webship-js package to package.json file.
+if [[ -f "${local_project_path}/package.json" ]]; then
+
 ## Append into package.json file.
 PACKAGE_NAME="webship-js"
 PACKAGE_VERSION="~1.0.0"
@@ -152,9 +155,9 @@ then
   sudo apt-get install jq
 fi
 jq --arg name "$PACKAGE_NAME" --arg version "$PACKAGE_VERSION" \
-   '.dependencies += {($name): $version}' "$PACKAGE_JSON_FILE" > temp.json && mv temp.json "$PACKAGE_JSON_FILE"
-
+   '.dependencies += {($name): $version}' "$PACKAGE_JSON_FILE"
 echo "Dependency '$PACKAGE_NAME@$PACKAGE_VERSION' appended to $PACKAGE_JSON_FILE."
+fi
 
 ## Remove the old generate-reports.js file.
 if [[ -f "${local_project_path}/generate-reports.js" ]]; then
@@ -180,6 +183,11 @@ sudo chmod 775 -R .; sudo chown www-data:$USER -R .;
 
 ## Place tests folder in its target path.
 mv ${local_project_path}/${version}/tests ${local_project_path}/tests;
+
+## Place package.json file in its target path.
+if ![[ -f "${local_project_path}/package.json" ]]; then
+mv ${local_project_path}/${version}/package.json ${local_project_path}/package.json;
+if
 
 ## Place generate-reports.js file in its target path.
 mv ${local_project_path}/${version}/generate-reports.js ${local_project_path}/generate-reports.js;
