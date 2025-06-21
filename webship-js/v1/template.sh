@@ -181,9 +181,6 @@ sudo chmod 775 -R .; sudo chown www-data:$USER -R .;
 ## Place tests folder in its target path.
 mv ${local_project_path}/${version}/tests ${local_project_path}/tests;
 
-## Place package.json file in its target path.
-mv ${local_project_path}/${version}/package.json ${local_project_path}/package.json;
-
 ## Place generate-reports.js file in its target path.
 mv ${local_project_path}/${version}/generate-reports.js ${local_project_path}/generate-reports.js;
 
