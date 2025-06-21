@@ -185,7 +185,7 @@ sudo chmod 775 -R .; sudo chown www-data:$USER -R .;
 mv ${local_project_path}/${version}/tests ${local_project_path}/tests;
 
 ## Place package.json file in its target path.
-if ![[ -f "${local_project_path}/package.json" ]]; then
+if [[ ! -f "${local_project_path}/package.json" ]]; then
 mv ${local_project_path}/${version}/package.json ${local_project_path}/package.json;
 if
 
