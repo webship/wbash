@@ -164,6 +164,21 @@ jq --arg name "$PACKAGE_NAME" --arg version "$PACKAGE_VERSION" \
 echo "Dependency '$PACKAGE_NAME@$PACKAGE_VERSION' appended to $PACKAGE_JSON_FILE."
 fi
 
+## Append webship-js test script command to package.json file.
+if [[ -f "${local_project_path}/package.json" ]]; then
+
+## Append into package.json file.
+SCRIPT_NAME="test"
+SCRIPT_COMMAND="nightwatch --format @cucumber/pretty-formatter --format-options '{\"colorsEnabled\": true}' --format-options '{\"theme\": {\"feature keyword\":[\"bold\",\"blue\"],\"feature name\":[\"blue\",\"underline\"],\"feature description\":[\"blueBright\"],\"scenario keyword\":[\"bold\",\"magenta\"],\"scenario name\":[\"magenta\",\"underline\"],\"step keyword\":[\"bold\",\"green\"],\"step text\":[\"greenBright\",\"italic\"]}}' --format json:./tests/reports/cucumber_report.json; node generate-reports.js;"
+
+PACKAGE_JSON_FILE="${local_project_path}/package.json"
+
+jq --arg name "$SCRIPT_NAME" --arg cmd "$SCRIPT_COMMAND" \
+   '.scripts += {($name): $cmd}' "$PACKAGE_JSON_FILE" > temp.json && sudo mv temp.json "$PACKAGE_JSON_FILE"
+
+   echo "Script '$SCRIPT_NAME' added/updated in $PACKAGE_JSON_PATH"
+fi
+
 ## Remove the old generate-reports.js file.
 if [[ -f "${local_project_path}/generate-reports.js" ]]; then
   rm ${local_project_path}/generate-reports.js;
