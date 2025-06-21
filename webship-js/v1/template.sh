@@ -209,10 +209,10 @@ mv ${local_project_path}/${version}/generate-reports.js ${local_project_path}/ge
 mv ${local_project_path}/${version}/nightwatch.conf.js ${local_project_path}/nightwatch.conf.js;
 
 # Replace 4444 with the selenium port.
-grep -rl "PROJECT_BASE_URL" ${local_project_path}/nightwatch.conf.js | xargs sed -i "s|4444|${default_selenium_port}|g";
+grep -rl "4444" ${local_project_path}/nightwatch.conf.js | xargs sed -i "s|4444|${default_selenium_port}|g";
 
 # Replace 127.0.0.1 with the selenium host.
-grep -rl "PROJECT_BASE_URL" ${local_project_path}/nightwatch.conf.js | xargs sed -i "s|127.0.0.1|${default_selenium_host}|g";
+grep -rl "127.0.0.1" ${local_project_path}/nightwatch.conf.js | xargs sed -i "s|127\.0\.0\.1|${default_selenium_host}|g";
 
 # Replace PROJECT_BASE_URL with the Project URL.
 grep -rl "PROJECT_BASE_URL" ${local_project_path}/nightwatch.conf.js | xargs sed -i "s|PROJECT_BASE_URL|${project_base_url}|g" ;
