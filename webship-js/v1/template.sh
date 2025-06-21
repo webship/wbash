@@ -142,6 +142,13 @@ if [[ -f "${local_project_path}/nightwatch.conf.js" ]]; then
   rm ${local_project_path}/nightwatch.conf.js;
 fi
 
+## Check if jq is installed.
+if ! command -v jq &> /dev/null
+then
+  sudo apt-get install jq
+  exit 1
+fi
+
 ## Append webship-js package to package.json file.
 if [[ -f "${local_project_path}/package.json" ]]; then
 
@@ -150,10 +157,7 @@ PACKAGE_NAME="webship-js"
 PACKAGE_VERSION="~1.0.0"
 
 PACKAGE_JSON_FILE="${local_project_path}/package.json"
-if ! command -v jq &> /dev/null
-then
-  sudo apt-get install jq
-fi
+
 jq --arg name "$PACKAGE_NAME" --arg version "$PACKAGE_VERSION" \
    '.dependencies += {($name): $version}' "$PACKAGE_JSON_FILE" > temp.json && sudo mv temp.json "$PACKAGE_JSON_FILE"
 
