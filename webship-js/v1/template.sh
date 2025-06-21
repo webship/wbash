@@ -149,44 +149,6 @@ then
   exit 1
 fi
 
-## Append webship-js package to package.json file.
-if [ -f "${local_project_path}/package.json" ]; then
-
-  PACKAGE_NAME="webship-js"
-  PACKAGE_VERSION="~1.0.0"
-
-  tmp_file=$(mktemp)
-
-  PACKAGE_JSON_FILE="${local_project_path}/package.json"
-
-  jq --arg name "$PACKAGE_NAME" --arg version "$PACKAGE_VERSION" \
-    '.dependencies += {($name): $version}' "$PACKAGE_JSON_FILE" > "$tmp_file" && mv "$tmp_file" "$PACKAGE_JSON_FILE"
-
-  echo "Dependency '$PACKAGE_NAME@$PACKAGE_VERSION' appended to $PACKAGE_JSON_FILE."
-else
-  echo "Error: $PACKAGE_JSON_FILE does not exist."
-  exit 1
-fi
-
-## Append webship-js test script command to package.json file.
-if [ -f "${local_project_path}/package.json" ]; then
-
-  SCRIPT_NAME="test"
-  SCRIPT_COMMAND="nightwatch --format @cucumber/pretty-formatter --format-options '{\"colorsEnabled\": true}' --format-options '{\"theme\": {\"feature keyword\":[\"bold\",\"blue\"],\"feature name\":[\"blue\",\"underline\"],\"feature description\":[\"blueBright\"],\"scenario keyword\":[\"bold\",\"magenta\"],\"scenario name\":[\"magenta\",\"underline\"],\"step keyword\":[\"bold\",\"green\"],\"step text\":[\"greenBright\",\"italic\"]}}' --format json:./tests/reports/cucumber_report.json; node generate-reports.js;"
-
-  tmp_file=$(mktemp)
-
-  PACKAGE_JSON_FILE="${local_project_path}/package.json"
-
-  jq --arg name "$SCRIPT_NAME" --arg cmd "$SCRIPT_COMMAND" \
-   '.scripts += {($name): $cmd}' "$PACKAGE_JSON_FILE" > "$tmp_file" && mv "$tmp_file" "$PACKAGE_JSON_FILE"
-
-  echo "Script '$SCRIPT_NAME' added to $PACKAGE_JSON_FILE."
-else
-  echo "Error: $PACKAGE_JSON_FILE does not exist."
-  exit 1
-fi
-
 ## Remove the old generate-reports.js file.
 if [[ -f "${local_project_path}/generate-reports.js" ]]; then
   rm ${local_project_path}/generate-reports.js;
