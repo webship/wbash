@@ -163,6 +163,14 @@ mv ${local_project_path}/${version}/cucumber.js ${local_project_path}/cucumber.j
 # Replace http://localhost:8080 with the Project URL.
 grep -rl "http://localhost:8080" ${local_project_path}/cucumber.js | xargs sed -i "s|http://localhost:8080|${project_base_url}|g" ;
 
+## Remove the old tsconfig.json file.
+if [[ -f "${local_project_path}/tsconfig.json" ]]; then
+  rm ${local_project_path}/tsconfig.json;
+fi
+
+## Place tsconfig.json file in its target path.
+mv ${local_project_path}/${version}/tsconfig.json ${local_project_path}/tsconfig.json;
+
 ## Install npm dependencies.
 npm install;
 
