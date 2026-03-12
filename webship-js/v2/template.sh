@@ -19,7 +19,7 @@ template_source="https://github.com/webship/webship-js-template/archive/refs/tag
 template_name="webship-js-template";
 
 ## Package template version.
-version="2.0.3" ;
+version="2.0.4" ;
 
 ## Read the IP address, geteway and local iface.
 unset local_gateway;
