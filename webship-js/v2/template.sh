@@ -19,7 +19,7 @@ template_source="https://github.com/webship/webship-js-template/archive/refs/tag
 template_name="webship-js-template";
 
 ## Package template version.
-version="2.0.2" ;
+version="2.0.3" ;
 
 ## Read the IP address, geteway and local iface.
 unset local_gateway;
@@ -170,6 +170,14 @@ fi
 
 ## Place tsconfig.json file in its target path.
 mv ${local_project_path}/${version}/tsconfig.json ${local_project_path}/tsconfig.json;
+
+## Remove the old playwright.config.ts file.
+if [[ -f "${local_project_path}/playwright.config.ts" ]]; then
+  rm ${local_project_path}/playwright.config.ts;
+fi
+
+## Place playwright.config.ts file in its target path.
+mv ${local_project_path}/${version}/playwright.config.ts ${local_project_path}/playwright.config.ts;
 
 ## Install npm dependencies.
 npm install;
